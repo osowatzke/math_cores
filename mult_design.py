@@ -204,7 +204,7 @@ class DspSliceArray:
                         rects = [[off, 26], [off+1, 43]]
                         off += 18
                     elif s.config == '26x18H':
-                        rects = [[off, 43], [off+26, 17]]
+                        rects = [[off, 43], [off+17, 26]]
                         off += 18
                     elif s.config == '26x17':
                         rects = [[off, 43]]
