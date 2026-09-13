@@ -175,13 +175,67 @@ class DspSliceArray:
                 last = bit
         e = idx
         print('%3d - %3d: %d' % (s,e,last))
+        
+    def create_xml_file(self):
+        with open('test.drawio','w') as file:
+            file.write('<mxfile host="app.diagrams.net" pages="1">\n')
+            file.write('  <diagram name="Page-1">\n')
+            file.write('    <mxGraphModel dx="871" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">\n')
+            file.write('      <root>\n')
+            file.write('        <mxCell id="0" />\n')
+            file.write('        <mxCell id="1" parent="0" />\n')
+            xi = 850 - 80
+            y = 80
+            for i in range(len(self.slices)):
+                row = self.slices[i]
+                off = self.off[i]
+                for (j,s) in enumerate(row):
+                    h = 20
+                    if s.config == '27x18L':
+                        rects = [[off, 27], [off+1, 43], [off+27, 17]]
+                        off += 18
+                    elif s.config == '27x18H':
+                        rects = [[off, 43], [off+17, 27], [off+26, 17]]
+                        off += 18
+                    elif s.config == '27x17':
+                        rects = [[off, 43], [off+26, 17]]
+                        off += 17
+                    elif s.config == '26x18L':
+                        rects = [[off, 26], [off+1, 43]]
+                        off += 18
+                    elif s.config == '26x18H':
+                        rects = [[off, 43], [off+26, 17]]
+                        off += 18
+                    elif s.config == '26x17':
+                        rects = [[off, 43]]
+                        off += 17
+                    else:
+                        raise ValueError(f"Unsupported Config '{s.config}'")
+                    for rect in rects:
+                        x = xi - rect[0]*4
+                        w = rect[1]*4
+                        s = rect[0]
+                        e = rect[0] + rect[1] - 1
+                        file.write(f'        <mxCell id="rect{i}-{j}" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">\n')
+                        file.write(f'          <mxGeometry height="{h}" width="{w}" x="{x-w}" y="{y}" as="geometry" />\n')
+                        file.write('        </mxCell>\n')
+                        file.write(f'        <mxCell id="s{i}-{j}" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;rounded=0;" value="{s}" vertex="1">')
+                        file.write(f'          <mxGeometry height="20" width="40" x="{x-40}" y="{y+20}" as="geometry" />\n')
+                        file.write('        </mxCell>\n')
+                        file.write(f'        <mxCell id="e{i}-{j}" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="{e}" vertex="1">')
+                        file.write(f'          <mxGeometry height="20" width="40" x="{x-w}" y="{y+20}" as="geometry" />\n')
+                        file.write('        </mxCell>\n')                        
+                        y += 40
+            file.write('      </root>\n')
+            file.write('    </mxGraphModel>\n')
+            file.write('  </diagram>\n')
+            file.write('</mxfile>')
             
 array = DspSliceArray()
-array.add_row(5, '27x18LH')
-array.add_row(5, '27x18LH')
-array.add_row(5, '27x18LH')
-array.add_row(5, '27x18LH')
-array.add_row(5, '26x18LH')
+array.add_row(3, '27x18LH')
+array.add_row(3, '26x18LH')
 array.print_c_bits()
-        
+array.create_xml_file()
+
+
     
