@@ -1,5 +1,5 @@
 `include "dsp48e2_params.vh"
-    
+`timescale 1 ns/1 ns    
 module mult_26x17 #(
     parameter   USE_CIN  = 0,
     parameter   USE_PCIN = 0) (
@@ -10,8 +10,8 @@ module mult_26x17 #(
     input  wire [16:0] bIn,
     input  wire [47:0] cIn = 48'b0,
     input  wire [47:0] pCIn = 48'b0,
-    input  wire [47:0] pOut,
-    input  wire [47:0] pCOut);
+    output wire [47:0] pOut,
+    output wire [47:0] pCOut);
     
     wire [29:0] a;
     wire [17:0] b;
