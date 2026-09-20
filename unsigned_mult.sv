@@ -8,7 +8,7 @@ module unsigned_mult #(
     input  wire rstIn,
     input  wire [A_WIDTH - 1:0] aIn,
     input  wire [B_WIDTH - 1:0] bIn,
-    input  wire [PROD_WIDTH - 1:0] yOut);
+    output wire [PROD_WIDTH - 1:0] yOut);
     
     function integer get_num_slices(
         input integer A_WIDTH,
