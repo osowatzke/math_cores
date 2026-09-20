@@ -17,8 +17,8 @@ module unsigned_mult_tb;
     
     always #(CLK_PERIOD/2) clk = ~clk;
     
-    parameter A_WIDTH = 32;
-    parameter B_WIDTH = 32;
+    parameter A_WIDTH = 64;
+    parameter B_WIDTH = 64;
     parameter PROD_WIDTH = A_WIDTH + B_WIDTH;
     
     reg [A_WIDTH-1:0] aR;

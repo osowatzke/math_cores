@@ -16,7 +16,7 @@ module tb_compare #(
             errR <= 0;
         end else begin
             if ((validIn == 1) && (refIn !== measIn)) begin
-                $display("Mismatch at time %t. Meas (0x%016X) != Ref (0x%016X)", $realtime, measIn, refIn);
+                $display("Mismatch at time %t. Meas (0x%X) != Ref (0x%X)", $realtime, measIn, refIn);
                 errR <= 1;
             end
         end

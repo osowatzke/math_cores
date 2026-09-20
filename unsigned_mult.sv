@@ -1,8 +1,8 @@
 `timescale 1 ns/1 ns
 
 module unsigned_mult #(
-    parameter   A_WIDTH    = 32,
-    parameter   B_WIDTH    = 32,
+    parameter   A_WIDTH    = 64,
+    parameter   B_WIDTH    = 64,
     localparam  PROD_WIDTH = A_WIDTH + B_WIDTH) (
     input  wire clkIn,
     input  wire rstIn,
@@ -162,7 +162,7 @@ module unsigned_mult #(
                 assign yPad[Y_END_IDX:Y_START_IDX] = pStage[i];
             end else begin
                 localparam Y_END_IDX = Y_START_IDX + 25;
-                localparam DELAY = 3*(NUM_STAGES-1-i);
+                localparam DELAY = (SLICES_PER_STAGE + 1)*(NUM_STAGES-1-i);
                 pipe #(.DELAY(DELAY), .WIDTH(26)) pipe_i(.clkIn(clkIn), .rstIn(rstIn), .xIn(pStage[i][25:0]), .xOut(yPad[Y_END_IDX:Y_START_IDX]));
             end
         end
