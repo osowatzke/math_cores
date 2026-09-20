@@ -1,8 +1,8 @@
 `timescale 1 ns/1 ns
 
 module unsigned_mult #(
-    parameter   A_WIDTH    = 26,
-    parameter   B_WIDTH    = 17,
+    parameter   A_WIDTH    = 32,
+    parameter   B_WIDTH    = 32,
     localparam  PROD_WIDTH = A_WIDTH + B_WIDTH) (
     input  wire clkIn,
     input  wire rstIn,
